@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Home from './home';
+import Services from './services';
+import About from './about';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Contact from './contact';
+import Header from './components/header';
+import Footer from './components/footer';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './components/GlobalStyles';
+
+
 
 function App() {
+  const theme ={
+    colors:{
+      heading:"#000000",
+      text:"#000000",
+      white:"#fff",
+      black:"#212529",
+      helper:"#058B8C",
+      bg:"#F5F5F5",
+
+
+    },
+    media:{mobile: "768px", tab: "998px"},
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme} >
+    <GlobalStyle/>
+    <BrowserRouter>
+
+    <Header/>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/services' element={<Services />} />
+        <Route path='/contact' element={<Contact />} />
+      </Routes>
+      <Footer/>
+    </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
